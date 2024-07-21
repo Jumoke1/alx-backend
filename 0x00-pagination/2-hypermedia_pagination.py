@@ -2,7 +2,7 @@
 """pagination"""
 import csv
 import math
-from typing import List
+from typing import List, Dict
 
 
 def index_range(page: int, page_size: int) -> tuple:
@@ -61,16 +61,15 @@ class Server:
 
     def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
         """get information about a page """
-        data = self.get_page(page, page_size)
+        page_data = self.get_page(page, page_size)
+        start, end = index_range(page, page_size)
         total_pages = math.ceil(len(self.__dataset) / page_size)
-        next_page = page + 1 if end_index < total_pages else None,
-        prev_page = page - 1 if start_index > 1 else None,
         page_info = {
-           "page_size": len(data),
-           "page": page,
-           "data": data,
-           "next_page": next_page,
-           "prev_page": prev_page,
-           "total_pages": total_pages
+            'page_size': len(page_data),
+            'page': page,
+            'data': page_data,
+            'next_page': page + 1 if end < len(self.__dataset) else None,
+            'prev_page': page - 1 if start > 0 else None,
+            'total_pages': total_pages,
         }
         return page_info
