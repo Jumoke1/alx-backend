@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """ a cache system module"""
 from base_caching import BaseCaching
 from collections import OrderedDict
