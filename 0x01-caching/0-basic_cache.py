@@ -11,7 +11,7 @@ class BasicCache(BaseCaching):
         """a method to assign item value for the key
         If key or item is None, this method should not do anything."""
 
-        if key is not None and item  is not None:
+        if key is not None and item is not None:
             self.cache_data[key] = item
 
     def get(self, key):
